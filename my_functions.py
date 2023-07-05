@@ -1,8 +1,51 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import pandas as pd
-import os
+import pickle
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+import seaborn as sb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import sklearn.metrics
+from tensorflow.keras.utils import plot_model
+
+# (i).   Mapping labels to their resp. classes
+# (ii).  Mapping classes to their resp. labels
+
+label_to_class = {
+    1  : 'WALKING',          
+    2  : 'WALKING_UPSTAIRS', 
+    3  : 'WALKING_DOWNSTAIRS',
+    4  : 'SITTING',      
+    5  : 'STANDING',       
+    6  : 'LAYING',         
+    7  : 'STAND_TO_SIT',      
+    8  : 'SIT_TO_STAND',     
+    9  : 'SIT_TO_LIE',     
+    10 : 'LIE_TO_SIT',      
+    11 : 'STAND_TO_LIE',      
+    12 : 'LIE_TO_STAND',   
+    np.nan : np.nan
+}
+class_to_label = {
+    'WALKING' : 1,
+    'WALKING_UPSTAIRS' : 2,
+    'WALKING_DOWNSTAIRS' : 3,
+    'SITTING' : 4,
+    'STANDING' : 5,         
+    'LAYING' : 6,      
+    'STAND_TO_SIT' : 7,     
+    'SIT_TO_STAND' : 8,     
+    'SIT_TO_LIE' : 9,     
+    'LIE_TO_SIT' : 10,        
+    'STAND_TO_LIE' : 11,     
+    'LIE_TO_STAND' : 12,
+    np.nan : np.nan
+}
 
 # Function to draw bar graph of classes corresponding to their frequencies in occurence
 
